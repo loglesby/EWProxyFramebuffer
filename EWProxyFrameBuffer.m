@@ -71,6 +71,30 @@ void EWProxyFramebufferDriverUnmapFramebuffer(io_connect_t connect, unsigned cha
 	IOConnectUnmapMemory(connect, 0, mach_task_self(), address);
 }
 
+unsigned char *EWProxyFramebufferDriverMapRawFramebuffer(io_connect_t connect, unsigned int *size)
+{
+#ifdef __LP64__
+    mach_vm_address_t address=0;
+    mach_vm_size_t vmsize=0;
+#else
+    vm_address_t address=0;
+    vm_size_t vmsize=0;
+#endif
+    IOConnectMapMemory(connect, 2, mach_task_self(), &address, &vmsize, kIOMapAnywhere);
+    *size=vmsize;
+    return (unsigned char*)address;
+}
+
+void EWProxyFramebufferDriverUnmapRawFramebuffer(io_connect_t connect, unsigned char *buf)
+{
+#ifdef __LP64__
+    mach_vm_address_t address=(mach_vm_address_t)buf;
+#else
+    vm_address_t address=(vm_address_t)buf;
+#endif
+    IOConnectUnmapMemory(connect, 2, mach_task_self(), address);
+}
+
 #pragma mark user->kernel call chain functions
 
 int EWProxyFramebufferDriverCheckFramebufferState(io_connect_t connect)

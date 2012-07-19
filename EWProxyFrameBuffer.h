@@ -51,8 +51,11 @@ void EWProxyFramebufferDriverEnableFramebuffer(io_connect_t connect, int mode);
 void EWProxyFramebufferDriverDisableFramebuffer(io_connect_t connect);
 unsigned char *EWProxyFramebufferDriverMapCursor(io_connect_t connect, unsigned int *size, int *width, int *height);
 void EWProxyFramebufferDriverUnmapCursor(io_connect_t connect, unsigned char *buf);
+unsigned char *EWProxyFramebufferDriverMapRawFramebuffer(io_connect_t connect, unsigned int *size);
 unsigned char *EWProxyFramebufferDriverMapFramebuffer(io_connect_t connect, unsigned int *size);
 void EWProxyFramebufferDriverUnmapFramebuffer(io_connect_t connect, unsigned char *buf);
+void EWProxyFramebufferDriverUnmapRawFramebuffer(io_connect_t connect, unsigned char *buf);
+
 int EWProxyFramebufferDriverUpdateMemory(io_connect_t connect);
 int EWProxyFramebufferDriverGetModeCount(io_connect_t connect);
 void EWProxyFramebufferDriverGetCursorState(io_connect_t connect, int *x, int *y, bool *visible);

@@ -284,21 +284,23 @@ IOReturn info_ennowelbers_proxyframebuffer_client::GetModeInfo(int mode,EWProxyF
 }
 IOReturn info_ennowelbers_proxyframebuffer_client::clientMemoryForType( UInt32 type, IOOptionBits * options, IOMemoryDescriptor ** memory )
 {
-	IOMemoryDescriptor *mem;
-	switch(type)
-	{
-		case 0:
-			mem=(IOMemoryDescriptor*)fProvider->buffer;
-			break;
-		case 1:
-			mem=(IOMemoryDescriptor*)fProvider->fbuffer->cursorMem;
-			break;
-	}
-	mem->retain();
-	if(mem==NULL)
-		return kIOReturnError;
-	*memory=mem;
-	return kIOReturnSuccess;
+    IOMemoryDescriptor *mem;
+    switch(type)
+    {
+        case 0:
+            mem=(IOMemoryDescriptor*)fProvider->buffer;
+            break;
+        case 1:
+            mem=(IOMemoryDescriptor*)fProvider->fbuffer->cursorMem;
+            break;
+        case 2:
+            mem=(IOMemoryDescriptor*)fProvider->fbuffer->getApertureRange(kIOFBSystemAperture);
+            break;
+    }
+    if(mem==NULL) return kIOReturnError;
+    if(type!=2) mem->retain(); // case 2 is already retained!
+    *memory=mem;
+    return kIOReturnSuccess;
 }
 
 void info_ennowelbers_proxyframebuffer_client::FireCursorStateChanged()

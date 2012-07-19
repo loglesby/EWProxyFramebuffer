@@ -213,9 +213,9 @@
 			isa = PBXGroup;
 			children = (
 				96614DB510E92E050066624E /* IOKit.framework */,
+				96614CBE10E919F30066624E /* EWProxyFrameBuffer.h */,
 				96614D9F10E92D7D0066624E /* EWProxyFrameBuffer.m */,
 				96614DA910E92DB70066624E /* EWProxyFrameBufferConnection-Info.plist */,
-				96614CBE10E919F30066624E /* EWProxyFrameBuffer.h */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -352,6 +352,9 @@
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* EWProxyFrameBuffer */;
 			projectDirPath = "";
 			projectRoot = "";
